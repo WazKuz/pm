@@ -32,5 +32,61 @@ v1.00
 - Initial release
     </textarea>
 
+
+    <!-- NEW SECTION: UBH BOOKMARKLET -->
+    <h2>UBH Bookmarklet</h2>
+
+    <p>
+        Drag the button below into your bookmarks bar.  
+        Then click it anywhere to launch UBH.
+    </p>
+
+    <a id="ubh" href="#"
+       style="
+            display:inline-block;
+            padding:10px 16px;
+            background:#1e293b;
+            color:white;
+            border:1px solid #334155;
+            border-radius:6px;
+            text-decoration:none;
+            font-family:Arial;
+            cursor:grab;
+       ">
+        ⬇ Drag UBH
+    </a>
+
+    <script>
+    const code = `(function(){
+document.body.innerHTML='<header><div class="ticker"><span id="tickerText">NEW GAMES COMING SOON</span></div></header><div class="search"><input type="text" placeholder="Search games..." onkeyup="searchGames(this.value)"></div><div class="grid"><div class="card" onclick="openGame(\\'https://WazKuz.github.io/mine\\')"><img src="https://i.pinimg.com/736x/5f/7b/a4/5f7ba42baff0614371954c9625d52cc4.jpg"><h3>Candy Crush Saga</h3></div><div class="card" onclick="openGame(\\'https://wazkuz.github.io/geom/\\')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCUiJgoAoVVcg9FA3_3NHHC4SkocpWthaYbg&s"><h3>Geometry Dash</h3></div><div class="card" onclick="openGame(\\'https://WazKuz.github.io/geo\\')"><img src="https://images.squarespace-cdn.com/content/v1/5e3bb512203ccf3516032e33/a0e8f281-94c0-47c2-a96c-b729daccf938/CRClassic_Banner_2000x1500.png"><h3>Crossy Road</h3></div><div class="card" onclick="openGame(\\'https://WazKuz.github.io/dash\\')"><img src="https://images.unsplash.com/photo-1654457066813-234e82a5e3e0"><h3>Chess</h3></div><div class="card" onclick="openGame(\\'https://wazkuz.github.io/minej/\\')"><img src="https://img.itch.zone/aW1nLzIzNzQwNTkxLnBuZw==/original/oHKlAh.png"><h3>Minecraft (JS)</h3></div></div><div class="modal" id="gameModal"><span class="close" onclick="closeGame()">✖</span><iframe id="gameFrame"></iframe></div>';
+
+var style=document.createElement('style');
+style.textContent='body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;}header{background:#020617;overflow:hidden;position:relative;padding:15px 0;border-bottom:2px solid #2563eb;}.ticker{white-space:nowrap;overflow:hidden;}.ticker span{display:inline-block;padding-left:100%;animation:scrollTicker 15s linear infinite;font-weight:bold;font-size:18px;color:#00f5ff;}@keyframes scrollTicker{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}.search{display:flex;justify-content:center;margin:20px;}.search input{width:60%;padding:12px;border-radius:10px;border:none;outline:none;font-size:16px;}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;padding:20px;}.card{background:#1e293b;border-radius:15px;overflow:hidden;cursor:pointer;transition:0.3s;}.card:hover{transform:scale(1.05);}.card img{width:100%;height:150px;object-fit:cover;}.card h3{padding:10px;text-align:center;}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;}.modal iframe{width:80%;height:80%;border:none;}.close{position:absolute;top:20px;right:30px;font-size:30px;cursor:pointer;}';
+document.head.appendChild(style);
+
+window.openGame=function(url){
+document.getElementById("gameModal").style.display="flex";
+document.getElementById("gameFrame").src=url;
+};
+
+window.closeGame=function(){
+document.getElementById("gameModal").style.display="none";
+document.getElementById("gameFrame").src="";
+};
+
+window.searchGames=function(query){
+let cards=document.querySelectorAll(".card");
+query=query.toLowerCase();
+cards.forEach(card=>{
+let title=card.innerText.toLowerCase();
+card.style.display=title.includes(query)?"block":"none";
+});
+};
+})();`;
+
+    document.getElementById("ubh").href =
+        "javascript:(function(){eval(decodeURIComponent('" + encodeURIComponent(code) + "'))})()";
+    </script>
+
 </body>
 </html>
