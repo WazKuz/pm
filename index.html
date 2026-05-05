@@ -32,30 +32,27 @@ v1.00
 - Initial release
     </textarea>
 
-    <h2>UBH Bookmarklet</h2>
+    <h2>UBH Tool</h2>
 
-    <p>
-        Drag the button below into your bookmarks bar.  
-        Then click it anywhere to launch UBH.
-    </p>
+    <p>Click the button below to copy the UBH JavaScript to your clipboard.</p>
 
-    <a id="ubh"
-       style="
-            display:inline-block;
-            padding:10px 16px;
+    <button id="ubhBtn"
+        style="
+            padding:12px 18px;
             background:#1e293b;
             color:white;
             border:1px solid #334155;
-            border-radius:6px;
-            text-decoration:none;
-            font-family:Arial;
-            cursor:grab;
-       ">
-        ⬇ Drag UBH
-    </a>
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        ">
+        UBH
+    </button>
+
+    <p id="status" style="margin-top:10px;color:#00f5ff;"></p>
 
     <script>
-    const code = `(function(){
+    const ubhCode = `(function(){
 
 document.body.innerHTML = \`
 <header>
@@ -143,9 +140,14 @@ window.searchGames=function(query){
 
 })();`;
 
-    document.getElementById("ubh").href =
-        "javascript:" + encodeURIComponent(code);
-
+    document.getElementById("ubhBtn").addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(ubhCode);
+            document.getElementById("status").innerText = "Copied UBH code to clipboard!";
+        } catch (err) {
+            document.getElementById("status").innerText = "Failed to copy. Your browser blocked clipboard access.";
+        }
+    });
     </script>
 
 </body>
